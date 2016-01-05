@@ -20,6 +20,7 @@ class PayObj(baseLocators):
         elemPay=(By.XPATH,"//div[@class='btn bt-primary size-s pay']")
         elemPayHis=(By.XPATH,"//div[@class='bt-default size-s history']")
         elemOrderHis=(By.XPATH,"//div[@class='bt-default size-s history']")
+        elemMsg=(By.XPATH,"//div[@class='msg']")
 
 class CheckoutObj(baseLocators):
         # Objects in add to cart

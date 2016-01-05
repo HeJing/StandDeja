@@ -59,5 +59,5 @@ class BaseTest(unittest.TestCase):
         actions.perform()
 
     def tearDown(self):
-        self.driver.close()
-        #pass
+        #self.driver.close()
+        pass
