@@ -2,18 +2,15 @@ import unittest
 from selenium import webdriver
 import time
 import basePages
+from locators import locators
 from locators.locators import Credits, FBLogin
+from loginPage import LoginPage
 
 
 class CreditsPage(basePages.BasePage):
-    def login(self):
-        elemLogin=self.driver.find_element(*Credits.elemCreLogin)
-        self.mouse_click(elemLogin)
-        time.sleep(2)
-        basePages.BasePage.login()
-
     def redeem(self):
         #time.sleep(2)
+
         if(self.check_exists_by_locator(*Credits.elemRedeem)):
             elemRedeem=self.driver.find_element(*Credits.elemRedeem)
             self.mouse_click(elemRedeem)
@@ -41,3 +38,28 @@ class CreditsPage(basePages.BasePage):
                     elemReConfirm=self.driver.find_element(*Credits.elemReConfirm)
                     print("Confirm")
                     self.mouse_click(elemReConfirm)
+
+    def LoginRedeem(self):
+        crePage= CreditsPage(self.driver)
+        creLogin=LoginPage(self.driver)
+        if(self.check_exists_by_locator(*locators.FBLogin.elemFBLogin)):
+            elemLogin=self.driver.find_element(*Credits.elemCreLogin)
+            self.mouse_click(elemLogin)
+            time.sleep(2)
+            print("Login")
+            creLogin.login()
+            time.sleep(5)
+
+            if(self.is_text_present("Your Credits")):
+                print("Login successfully!")
+                crePage.redeem()
+            else:
+                print("Failed to login.")
+
+        elif(self.is_text_present("Your Credits")):
+            print("Redeem")
+            crePage.redeem()
+
+        else:
+            print("Error")
+        print(time.strftime("End: "+'%Y-%m-%d %H:%M:%S',time.localtime(time.time())))

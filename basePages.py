@@ -2,23 +2,48 @@ from selenium.common.exceptions import NoSuchElementException
 import time
 from locators.locators import FBLogin
 import baseTest
+from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.action_chains import ActionChains
 
 class BasePage(baseTest.BaseTest):
     def __init__(self, driver):
         self.driver = driver
+        self.inteval_time=20
 
-    def login(self):
-        elemUsername=self.driver.find_element(*FBLogin.elemFBUsername)
-        elemPassword=self.driver.find_element(*FBLogin.elemFBPwd)
-        elemSubmit=self.driver.find_element(*FBLogin.elemFBSubmit)
 
-        elemUsername.send_keys("ringsqa2@gmail.com")
-        elemPassword.send_keys("mozatm2u")
-        self.mouse_click(elemSubmit)
+        # Assert whether the text exist in this page
+    def is_text_present(self, text):
+        try:
+            body = self.driver.find_element_by_tag_name("body")
+            # find body tag element
+            #print("Show body's text:"+body.text)
+        except NoSuchElementException, e:
+            return False
+        return text in body.text.encode('utf8') # check if the text is in body's text
 
-        time.sleep(5)
-        if(self.is_text_present("Your Credits")):
-            print("Login successfully!")
-            self.redeem()
-        else:
-            print("Failed to login.")
+    #assert whether the control exists in this page
+    """
+    def check_exists_by_xpath(self,xpath):
+        try:
+            self.driver.implicitly_wait(2)
+            self.driver.find_element_by_xpath(xpath)
+            self.driver.implicitly_wait(self.inteval_time)
+        except NoSuchElementException:
+            return False
+        return True"""
+
+    def check_exists_by_locator(self,by_method,locator_value):
+        try:
+            self.driver.implicitly_wait(2)
+            self.driver.find_element(by_method, locator_value)
+            self.driver.implicitly_wait(self.inteval_time)
+        except NoSuchElementException:
+            return False
+        return True
+
+    def mouse_click(self,o_element):
+        time.sleep(1)
+        actions = ActionChains(self.driver)
+        actions.click(o_element)
+        actions.perform()
