@@ -1,28 +1,25 @@
-from selenium.common.exceptions import NoSuchElementException
 import time
-from locators.locators import FBLogin
-import baseTest
-from selenium.webdriver.common.keys import Keys
+
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.action_chains import ActionChains
 
-class BasePage(baseTest.BaseTest):
+
+class BasePage(object):
     def __init__(self, driver):
         self.driver = driver
-        self.inteval_time=20
+        self.inteval_time = 20
 
-
-        # Assert whether the text exist in this page
+    # Assert whether the text exist in this page
     def is_text_present(self, text):
         try:
             body = self.driver.find_element_by_tag_name("body")
             # find body tag element
-            #print("Show body's text:"+body.text)
+            # print("Show body's text:"+body.text)
         except NoSuchElementException, e:
             return False
-        return text in body.text.encode('utf8') # check if the text is in body's text
+        return text in body.text.encode('utf8')  # check if the text is in body's text
 
-    #assert whether the control exists in this page
+    # assert whether the control exists in this page
     """
     def check_exists_by_xpath(self,xpath):
         try:
@@ -33,7 +30,7 @@ class BasePage(baseTest.BaseTest):
             return False
         return True"""
 
-    def check_exists_by_locator(self,by_method,locator_value):
+    def check_exists_by_locator(self, by_method, locator_value):
         try:
             self.driver.implicitly_wait(2)
             self.driver.find_element(by_method, locator_value)
@@ -42,7 +39,7 @@ class BasePage(baseTest.BaseTest):
             return False
         return True
 
-    def mouse_click(self,o_element):
+    def mouse_click(self, o_element):
         time.sleep(1)
         actions = ActionChains(self.driver)
         actions.click(o_element)

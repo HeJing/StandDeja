@@ -1,14 +1,11 @@
-import unittest
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.common.exceptions import NoSuchElementException
 import time
 import string
-import baseTest
+
+from tests import baseTest
 from locators.locators import BuyObj, CheckoutObj, PayObj, FBLogin
 
 
-class test_history(baseTest.BaseTest):
+class history(baseTest.BaseTest):
     def setUp(self):
         super(test_history,self).setUp()
 
