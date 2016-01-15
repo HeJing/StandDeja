@@ -2,6 +2,7 @@ import time
 
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.action_chains import ActionChains
+import string
 
 
 class BasePage(object):
@@ -44,3 +45,9 @@ class BasePage(object):
         actions = ActionChains(self.driver)
         actions.click(o_element)
         actions.perform()
+
+    # Change debug mode
+    def changeDebugMode(self):
+        self.cur_url=self.driver.current_url
+        self.new_url=string.replace(self.cur_url,'debug=1','debug=0')
+        self.driver.get(self.new_url)
