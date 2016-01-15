@@ -39,7 +39,7 @@ class testAddtoCart(baseTest.BaseTest):
 
         # Login in FB
         login=FacebookLoginPage(self.driver)
-        login.type_username_and_password(self,"ringsqa2@mozat.com","mozatm2u")
+        login.type_username_and_password("ringsqa2@mozat.com","mozatm2u")
         login.tap_login_button()
 
         #Payment
