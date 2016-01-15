@@ -10,9 +10,3 @@ class Buy(basePages.BasePage):
         elemBuy=self.driver.find_element(*BuyObj.elemCartBuy)
         print("Click buy.")
         self.mouse_click(elemBuy)
-
-    def chooseSize(self):
-        elemSize=self.driver.find_element_by_xpath(*BuyObj.elemSize)
-        print("Choose size.")
-        self.mouse_click(elemSize)
-

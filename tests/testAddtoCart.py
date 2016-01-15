@@ -2,9 +2,11 @@ import time
 import baseTest
 from Pages.buyPage import Buy
 from Pages.changeMode import ChangeMode
-from Pages.addtocartPage import AddtoCart
+from Pages.addtocartPage import AddToCart
 from Pages.checkoutPage import Checkout
 from Pages.payPage import PayPage
+from Pages.chooseSizePage import ChooseSize
+from Pages.loginPage import FacebookLoginPage
 
 class testAddtoCart(baseTest.BaseTest):
     def setUp(self):
@@ -21,17 +23,24 @@ class testAddtoCart(baseTest.BaseTest):
 
         buyItem.buy()
         changeMode.changeDebugMode()
-        buyItem.buy()
+        #buyItem.buy()
 
         #add to cart
-        cart=AddtoCart(self.driver)
+        choose_size=ChooseSize(self.driver)
+        cart=AddToCart(self.driver)
 
+        choose_size.chooseSize()
         cart.addtocart()
         cart.gotocart()
+        time.sleep(2)
 
         #checkout
-        check_out=Checkout(self.driver)
-        check_out.checkout()
+        cart.checkout()
+
+        # Login in FB
+        login=FacebookLoginPage(self.driver)
+        login.type_username_and_password(self,"ringsqa2@mozat.com","mozatm2u")
+        login.tap_login_button()
 
         #Payment
         pay=PayPage(self.driver)
