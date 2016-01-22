@@ -1,4 +1,5 @@
 import time
+from Pages.orderHisPages import OrderHis
 import baseTest
 from Pages.buyPage import Buy
 from Pages.changeMode import ChangeMode
@@ -38,10 +39,17 @@ class testAddtoCart(baseTest.BaseTest):
         cart.checkout()
 
         # Login in FB
+        cart.loginEntrance()
         login=FacebookLoginPage(self.driver)
-        login.type_username_and_password("ringsqa2@mozat.com","mozatm2u")
+        login.type_username_and_password("ringsqa2@gmail.com","mozatm2u")
         login.tap_login_button()
+
+        # Checkout
+        cart.checkout()
 
         #Payment
         pay=PayPage(self.driver)
         pay.payment()
+
+        # Order History
+        order_his=OrderHis.orderHis()

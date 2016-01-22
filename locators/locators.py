@@ -28,6 +28,7 @@ class PayObj(baseLocators):
 
 class CheckoutObj(baseLocators):
     # Objects in add to cart
+    elemCartCheckout=(By.XPATH,"//div[@class='btn bt-primary size-s co normal']")
     elemCheckout = (By.XPATH, "//div[@class='btn bt-default size-s checkout']")
     elemCard = (By.XPATH, "//div[@class='detail ellipsis']")
     elemAddCard = (By.XPATH, "//section[@class='add-card']")
@@ -60,3 +61,6 @@ class Credits(baseLocators):
 
     # Objects in redeem within 30 days
     elemFailOK = (By.XPATH, "//div[@class='yes']")
+
+class OrderHistory(baseLocators):
+    elemOrderHis=(By.XPATH,"//div[@class='bt-default size-s history']")
