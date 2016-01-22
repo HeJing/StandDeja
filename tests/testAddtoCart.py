@@ -53,3 +53,5 @@ class testAddtoCart(baseTest.BaseTest):
 
         # Order History
         order_his=OrderHis.orderHis()
+
+        print(time.strftime("End: " + '%Y-%m-%d %H:%M:%S', time.localtime(time.time())))

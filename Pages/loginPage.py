@@ -22,7 +22,7 @@ class FacebookLoginPage(basePages.BasePage):
         elem_submit = self.driver.find_element(*FBLogin.elemFBSubmit)
         self.mouse_click(elem_submit)
         time.sleep(5)
-        print(time.strftime("End: " + '%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
+        print(time.strftime("Login end: " + '%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
 
         # if (self.is_text_present("Your Credits")):
         #     print("Login successfully!")
